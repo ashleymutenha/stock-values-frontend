@@ -1,0 +1,65 @@
+<div class ="__center scroll
+">
+    <table class = "table">
+        <thead class = "bg-light">
+            <th>Stock    <span style ="margin-left: 10px;"> 
+
+                <svg (click) ="orderDescending('stock_id',stockValues)"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                  </svg>   
+                  
+                  <svg (click) ="orderAscending('stock_id',stockValues)"style ="margin-top: 3px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                  </svg>
+
+            </span></th>
+                <th>
+                 Date
+
+                 <span style ="margin-left: 10px;"> 
+
+                    <svg (click) ="dateFieldsDescending(stockValues)"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                      </svg>   
+                      
+                      <svg (click) ="dateFieldsAscending(stockValues)"style ="margin-top: 3px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                      </svg>
+    
+                </span>
+                </th>
+
+
+                <th>Value
+
+
+                    <span style ="margin-left: 10px;"> 
+
+                        <svg (click) ="orderDescending('value',stockValues)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                          </svg>   
+                          
+                          <svg (click) ="orderAscending('value',stockValues)" style ="margin-top: 3px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+                          </svg>
+        
+                    </span>
+                </th>
+
+               
+            
+        </thead>
+
+        <tbody  *ngIf ="api.stockID != undefined">
+          <tr  *ngFor ="let value of selectedStockValues()">
+              <td>{{value.stock_id}}</td>
+              <td>{{value.date}}</td>
+              <td>{{value.value}}</td>
+          </tr>
+        </tbody>
+
+
+    </table>
+
+    <button  (click) =" exportStockValues()" class ="btn btn-light rounded-pill mb-2" style = "margin-left: 80%;" *ngIf ="api.stockID != undefined">Export as JSON</button>
+</div>
