@@ -61,5 +61,5 @@
 
     </table>
 
-    <button  (click) =" exportStockValues()" class ="btn btn-light rounded-pill mb-2" style = "margin-left: 80%;" *ngIf ="api.stockID != undefined">Export as JSON</button>
+    <a  (click) =" exportStockValues()"  class ="btn btn-light rounded-pill mb-2" [href] = "jsonUri"  style = "margin-left: 80%;" *ngIf ="api.stockID != undefined">Export as JSON</a>
 </div>

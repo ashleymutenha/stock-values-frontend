@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, SecurityContext } from '@angular/core';
 import { StockServiceService } from 'src/app/stock-service.service';
+
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-selected-stock',
   templateUrl: './selected-stock.component.html',
@@ -8,9 +10,11 @@ import { StockServiceService } from 'src/app/stock-service.service';
 export class SelectedStockComponent {
 
   stockValues:any =[]
+
+  jsonUri:any
  
 
-  constructor(public api:StockServiceService){}
+  constructor(public api:StockServiceService, private sanitizer: DomSanitizer){}
 
   ngOnInit():void{
     this.getStockValues()
@@ -47,7 +51,39 @@ export class SelectedStockComponent {
   exportStockValues(){
     this.api.exportStockValues(this.selectedStockValues()).subscribe(data =>{
       console.log(data)
+
+      let __response = JSON.stringify(data)
+      let blob  = new Blob([__response],{type:'text/json'})
+      let url = window.URL.createObjectURL(blob)
+      
+      this.downloadFile(url,this.generateFileName(data))
+     
+
+      
+
+      
     })
+  }
+
+
+  downloadFile(dataHref:any, filename:any){
+    var link = document.createElement("a")
+    link.href = dataHref
+    link.download = filename
+    link.click()
+  }
+
+  generateFileName(object:any){
+   let name:any
+    let id = object[0].stock_id
+    
+
+    this.api.stockArray.map((value:any)=>{
+      value.id ==id ?
+      name = value.stock +".json":name
+    })
+    return name
+
   }
 
   orderAscending(dataField:any, dataArray:any){
